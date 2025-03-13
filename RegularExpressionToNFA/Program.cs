@@ -34,6 +34,46 @@ namespace RegularExpressionToNFA {
             }
             return st.Count == 0;
         }
+        static void dfs(int i, Node par, Node begin, ref string s, char[] backEdge) {
+            if (i == s.Length)
+                return;
+            if (s[i] == '*' || s[i] == '+') {
+                dfs(i + 1, par, begin, ref s, backEdge);
+                return;
+            }
+            if (s[i] == '(') {
+                var node = new Node();
+                par.child.Add(new Tuple<Node?, char>(node, '#'));
+                dfs(i + 1, node, node, ref s, backEdge);
+            }
+            else if (Char.IsAsciiLetter(s[i])) {
+                var node1 = new Node();
+                var node2 = new Node();
+                node1.child.Add(new Tuple<Node?, char>(node2, s[i]));
+                par.child.Add(new Tuple<Node?, char>(node1, '#'));
+                dfs(i + 1, node2, begin, ref s, backEdge);
+            }
+            else if (s[i] == ')') {
+                if (backEdge[i] == '*') {
+                    var node = new Node();
+                    par.child.Add(new Tuple<Node?, char>(node, '#'));
+                    node.child.Add(new Tuple<Node?, char>(begin, '#'));
+                    begin.child.Add(new Tuple<Node?, char>(node, '#'));
+                    dfs(i + 1, node, begin, ref s, backEdge);
+                }
+                else if (backEdge[i] == '+') {
+                    var node = new Node();
+                    par.child.Add(new Tuple<Node?, char>(node, '#'));
+                    node.child.Add(new Tuple<Node?, char>(begin, '#'));
+                    dfs(i + 1, node, begin, ref s, backEdge);
+                }
+                else {
+                    var node = new Node();
+                    par.child.Add(new Tuple<Node?, char>(node, '#'));
+                    dfs(i + 1, node, begin, ref s, backEdge);
+                }
+            }
+        }
         static void Main(string[] args) {
             // input
             string s = Console.ReadLine();
@@ -52,7 +92,7 @@ namespace RegularExpressionToNFA {
                     }
                     sb.Clear();
                 }
-                else if (c != '*' && c != '+')
+                else if (c == '(' || c == ')')
                     sb.Append(c);
             }
             if (!regular(sb.ToString())) {
@@ -84,36 +124,24 @@ namespace RegularExpressionToNFA {
                     backEdge[i] = '.';
             }
             // convert regular expression to NFA
-            var st = new Stack<Node>();
-            var par = new Stack<Node>();
-            par.Push(new Node());
-            for (int i = 0; i < s.Length; i++) { // maybe i + 2 < s.Length
-                if (s[i] == '*' || s[i] == '+')
+            var node = new Node();
+            dfs(1, node, node, ref s, backEdge);
+            Console.WriteLine("NFA is created successfully");
+            var visited = new HashSet<Node>();
+            dfs(node, visited);
+        }
+        static void dfs(Node node, HashSet<Node> visited) {
+            visited.Add(node);
+            //Console.WriteLine("Node " + node.id + " :");
+            foreach (var child in node.child) {
+                if (child.Item1 == null)
                     continue;
-                if (s[i] == '(') {
-                    if (Char.IsAsciiLetter(s[i + 1])) {
-                        var node1 = new Node();
-                        var node2 = new Node();
-                        node1.Parent = par.Peek();
-                        node2.Parent = node1;
-                        par.Peek().child.Add(new Tuple<Node?, char>(node1, '#'));
-                        node1.child.Add(new Tuple<Node?, char>(node2, s[i + 1]));
-                        par.Push(node1);
-                        par.Push(node2);
-                        ++i; // maybe i += 2
-                    }
-                    else {
-                        var node = new Node();
-                        node.Parent = par.Peek();
-                        par.Peek().child.Add(new Tuple<Node?, char>(node, '#'));
-                        par.Push(node);
-                    }
-                }
-                else if (s[i] == ')') {
-                    if (backEdge[i] == '.') {
-                        par.Pop();
-                        par.Pop();
-                    }
+                //Console.WriteLine("Edge " + child.Item2 + " to Node " + child.Item1.id);
+                Console.WriteLine(node.id + " " + child.Item2 + " " + child.Item1.id);
+                Console.WriteLine();
+                if (child.Item1 != null && !visited.Contains(child.Item1)) {
+                    dfs(child.Item1, visited);
+
                 }
             }
         }

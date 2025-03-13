@@ -1,0 +1,14 @@
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\RegularExpressionToNFA.GeneratedMSBuildEditorConfig.editorconfig
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\RegularExpressionToNFA.AssemblyInfoInputs.cache
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\RegularExpressionToNFA.AssemblyInfo.cs
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\RegularExpressionToNFA.csproj.CoreCompileInputs.cache
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\bin\Debug\net8.0\RegularExpressionToNFA.exe
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\bin\Debug\net8.0\RegularExpressionToNFA.deps.json
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\bin\Debug\net8.0\RegularExpressionToNFA.runtimeconfig.json
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\bin\Debug\net8.0\RegularExpressionToNFA.dll
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\bin\Debug\net8.0\RegularExpressionToNFA.pdb
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\RegularExpressionToNFA.dll
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\refint\RegularExpressionToNFA.dll
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\RegularExpressionToNFA.pdb
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\RegularExpressionToNFA.genruntimeconfig.cache
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\ref\RegularExpressionToNFA.dll
