@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RegularExpressionToNFA {
     class Node {
@@ -124,11 +125,51 @@ namespace RegularExpressionToNFA {
                     backEdge[i] = '.';
             }
             // convert regular expression to NFA
-            var node = new Node();
-            dfs(1, node, node, ref s, backEdge);
+            var root = new Node();
+            //dfs(1, node, node, ref s, backEdge);
+            var parentStack = new Stack<Node>();
+            var beginStack = new Stack<Node>();
+            parentStack.Push(root);
+            beginStack.Push(root);
+            for (int i = 1; i < s.Length; ++i) {
+                if (s[i] == '*' || s[i] == '+')
+                    continue;
+                var par = parentStack.Peek();
+                var begin = beginStack.Count != 0 ? beginStack.Peek() : null;
+                if (s[i] == '(') {
+                    var node = new Node();
+                    par.child.Add(new Tuple<Node?, char>(node, '#'));
+                    parentStack.Push(node);
+                    beginStack.Push(node);
+                }
+                else if (Char.IsAsciiLetter(s[i])) {
+                    var node = new Node();
+                    par.child.Add(new Tuple<Node?, char>(node, s[i]));
+                    parentStack.Push(node);
+                }
+                else if (s[i] == ')') {
+                    if (backEdge[i] == '*') {
+                        var node = new Node();
+                        par.child.Add(new Tuple<Node?, char>(node, '#'));
+                        node.child.Add(new Tuple<Node?, char>(begin, '#'));
+                        begin.child.Add(new Tuple<Node?, char>(node, '#'));
+                        parentStack.Push(node);
+                        beginStack.Pop();
+                    }
+                    else if (backEdge[i] == '+') {
+                        var node = new Node();
+                        par.child.Add(new Tuple<Node?, char>(node, '#'));
+                        node.child.Add(new Tuple<Node?, char>(begin, '#'));
+                        parentStack.Push(node);
+                        beginStack.Pop();
+                    }
+                    else
+                        beginStack.Pop();
+                }
+            }
             Console.WriteLine("NFA is created successfully");
             var visited = new HashSet<Node>();
-            dfs(node, visited);
+            dfs(root, visited);
         }
         static void dfs(Node node, HashSet<Node> visited) {
             visited.Add(node);
@@ -137,7 +178,7 @@ namespace RegularExpressionToNFA {
                 if (child.Item1 == null)
                     continue;
                 //Console.WriteLine("Edge " + child.Item2 + " to Node " + child.Item1.id);
-                Console.WriteLine(node.id + " " + child.Item2 + " " + child.Item1.id);
+                Console.WriteLine(node.id + " " + child.Item1.id + " " + child.Item2);
                 Console.WriteLine();
                 if (child.Item1 != null && !visited.Contains(child.Item1)) {
                     dfs(child.Item1, visited);
