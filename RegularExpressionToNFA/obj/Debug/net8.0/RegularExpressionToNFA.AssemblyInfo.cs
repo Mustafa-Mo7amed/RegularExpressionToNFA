@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RegularExpressionToNFA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db348a6668491198affa9020c993074c2cbb4121")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+842e6e8f94571763324eb76b235245369ce18380")]
 [assembly: System.Reflection.AssemblyProductAttribute("RegularExpressionToNFA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RegularExpressionToNFA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
