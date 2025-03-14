@@ -12,3 +12,4 @@ D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\re
 D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\RegularExpressionToNFA.pdb
 D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\RegularExpressionToNFA.genruntimeconfig.cache
 D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\ref\RegularExpressionToNFA.dll
+D:\VS Projects\RegularExpressionToNFA\RegularExpressionToNFA\obj\Debug\net8.0\RegularExpressionToNFA.sourcelink.json
